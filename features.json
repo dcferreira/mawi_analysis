@@ -1,0 +1,37 @@
+{
+    "features": [
+        "protocolIdentifier",
+
+        "ipTotalLength",
+        "packetTotalCount",
+        "flowDurationMicroseconds",
+        {"median": ["ipTotalLength"]},
+        {"variance": ["ipTotalLength"]},
+        {"median": ["_interPacketTimeMicroseconds"]},
+        {"variance": ["_interPacketTimeMicroseconds"]},
+
+        {"apply": ["ipTotalLength", "forward"]},
+        {"apply": ["packetTotalCount", "forward"]},
+        {"apply": ["flowDurationMicroseconds", "forward"]},
+        {"apply": [{"median": ["ipTotalLength"]}, "forward"]},
+        {"apply": [{"variance": ["ipTotalLength"]}, "forward"]},
+        {"apply": [{"median": ["_interPacketTimeMicroseconds"]}, "forward"]},
+        {"apply": [{"variance": ["_interPacketTimeMicroseconds"]}, "forward"]},
+
+        {"apply": ["ipTotalLength", "backward"]},
+        {"apply": ["packetTotalCount", "backward"]},
+        {"apply": ["flowDurationMicroseconds", "backward"]},
+        {"apply": [{"median": ["ipTotalLength"]}, "backward"]},
+        {"apply": [{"variance": ["ipTotalLength"]}, "backward"]},
+        {"apply": [{"median": ["_interPacketTimeMicroseconds"]}, "backward"]},
+        {"apply": [{"variance": ["_interPacketTimeMicroseconds"]}, "backward"]}
+    ],
+    "bidirectional": true,
+    "key_features": [
+        "sourceIPAddress",
+        "destinationIPAddress",
+        "protocolIdentifier",
+        "sourceTransportPort",
+        "destinationTransportPort"
+    ]
+}
