@@ -28,10 +28,6 @@
     ],
     "bidirectional": true,
     "key_features": [
-        "sourceIPAddress",
-        "destinationIPAddress",
-        "protocolIdentifier",
-        "sourceTransportPort",
-        "destinationTransportPort"
+        "protocolIdentifier"
     ]
 }

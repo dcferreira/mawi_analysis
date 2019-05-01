@@ -11,11 +11,12 @@ if [ $OPTION == "download" ]; then
         mv ${FILENAME}.gz /shared/downloads/${FILENAME}.gz
     fi
 else
-    gunzip -c /shared/downloads/${FILENAME}.gz > ${FILENAME}
+    gunzip -c /shared/downloads/${FILENAME}.gz > ${FILENAME} || exit 1
     # correct duplicate packets in 2015
     if [ "$YEAR" -eq 2015 ]; then
-        editcap -D64 $FILENAME "${FILENAME}_fixed"
+        editcap -F pcap -D64 $FILENAME "${FILENAME}_fixed"
         mv ${FILENAME}_fixed $FILENAME
     fi
-    go-flows run -sort start features /shared/features.json export csv /shared/out/${FILENAME}.csv source libpcap ${FILENAME}
+    go-flows run -sort start features /shared/features.json export csv ${FILENAME}.csv source libpcap ${FILENAME}
+    mv ${FILENAME}.csv /shared/out/${FILENAME}.csv
 fi
